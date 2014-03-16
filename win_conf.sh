@@ -1,0 +1,1 @@
+c_cv_func_realloc_0_nonnull=yes ac_cv_func_malloc_0_nonnull=yes LDFLAGS="-static-libgcc -static-libstdc++" ./configure --prefix="/home/adrian/proj/dome/inst" --host=i686-w64-mingw32 --build i686-linux

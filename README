@@ -1,0 +1,291 @@
+NOTE: This is a copy of DOME 4.80, 08/10/2002 with very minor modifications.
+
+    Changes:       Changes to code to ease building on modern systems.
+                   Changes to POV output for compatibility with latest POV-Ray.
+                   Added OFF output.
+                   Removed dxftopov.
+                   Fixed reporting of angles greater than 90 degrees.
+    Version home:  http://www.antiprism.com/other/dome
+    Changes by:    Adrian Rossiter <adrian@antiprism.com>
+                   http://www.antiprism.com/
+
+
+Geodesic Dome Design
+DOME
+Version 4.80ar.02
+16 March 2014
+
+=============
+What is DOME?
+=============
+DOME is a program which calculates the properties of a geodesic dome symmetry
+triangle. DOME calculates spherical vertex coordinates, symmetry triangle topological
+abundance, and chord factors. DOME supports class I (alternate) and class II (triacon)
+breakdowns for Icosahedron, Octahedron and Tetrahedron polyhedron types. DOME also
+supports "Buckyball" formations as well as elliptical geodesics & geodesic parabolic dishes. 
+
+=============
+Why DOME?    
+=============
+DOME began as a set of geodesic math test algorithims for use in investigating
+properties of generalized geodesic structures. This continues to be the main purpose
+of my development of the DOME code. DOME should serve as a basic tool for those interested 
+in geodesic dome design and modeling. All source code is also included in this package
+and is freely modifiable under the conditions of the GNU General Public License.
+             
+====================
+System Requirements 
+====================
+Dome frequency is limited by the amount of memory available.
+
+=========================================
+Changes From Previous Release Version 4.6
+=========================================
+-Rewrote several functions into modules.
+-Added Windows GUI front-end
+-Upgraded VRML output to the VRML97 specification
+
+======
+Usage
+======
+DOME is run as a console application. The program will terminate with an error
+message if there is not enough memory to allocate array space for the coordinate matrix.
+If this occurs, re-run DOME and request a smaller subdivision frequency. Only even
+frequencies are allowed when using class II.
+
+Usage: dome [-fnnn] [-cn] [-px] [-s or -sb] [-en] [-v] [-w] [-h] [filename.xxx]<BR>
+
+Where: -fnnn is geodesic frequency (default nnn=2)
+       -cn is class type (n=1 or 2; default n=1)
+       -px sets the polyhedron type
+        where x is: i for icosahedron (default)
+                    o for octahedron
+                    t for tetrahedron
+       -s  generate full sphere data (default: symmetry triangle)
+       -sb generate a buckyball. Must use class I with frequency equal
+           to a multiple of three.
+       -en enable elliptical formation (default: n=1 circle)
+           n=elliptical eccentricity (n > 0.0 and n < 2.0)
+       -v  verbose data display at run-time
+       -dn enables parabolid and specifies focus location
+       -rn sets Outer radius of paraboloid.
+       -w  enable wire-frame VRML or DXF output (default: face data)
+       -h  displays a help screen
+        filename.xxx is a standard DOS filename
+        where xxx is: DXF, DAT, WRL, POV, PRN or OFF
+
+=================
+Examples of Usage
+=================
+-A 5 frequency, class I, icosahedron sphere in DXF format
+ (note class I & icosa are the defaults): dome -f5 myfile.dxf
+-A 3 frequency buckyball in POV format: dome -f3 -sb myfile.pov
+-A 10 frequency, class II, octahedron symmetry triangle in DXF
+ format: dome -f10 -c2  -po myfile.dxf
+
+============
+File Formats
+============ 
+DOME currently supports five file formats:
+1.) DXF - DXF face data which can be input into most computer aided design packages.
+    Each polyhedron face is saved on a seperate level if spherical data generation is
+    requested.  DXF data for Buckyballs are saved as LINE data. The default DXF data for 
+    all other structures is 3D POLYFACE data. This can be changed to LINE data with
+    the -w option. Note that not all applications support DXF line data. In these cases,
+    use polyface instead. 
+2.) DAT - An ASCII report format. Shows only symmetry triangle parameters. This format
+    displays chord factors, face angles and axial angles. Not available for Buckyballs.
+3.) PRN - An ASCII comma delimited format. Contains vertex coordinate and chord
+    coordinate data. Suitable for parsing into custom routines and spreadsheets. Only data 
+    for the symmetry triangle is saved. Not available for Buckyballs.
+4.) POV - POV-ray script file. Generates spheres for vertexia, cylinders for chords
+    and triangles for faces. Faces are not saved when using the Buckyball option.
+    The POV script consists of two files. The .POV file contains the scene description 
+    while the dome.inc file contains the dome geometry. Note that DOME references "up"
+    as the z-axis while POV references the y-axis. The Sky statement in the camera
+    definition compensates for this. 
+5.) WRL - VRML file for use with a VRML enabled browser such as the Cortona plugin
+    from ParallelGraphics. Only wire-frame output is available with Buckyball option. 
+    WinDome supports the VRML97 Specification.
+6.) OFF - Can be processed, analysed and viewed by the Antiprism tools (use
+    off_util to merge elements), Geomview and JavaView.
+
+
+=====================
+Elliptical Structures
+=====================
+DOME allows the creation of elliptical geodesic structures. The -en switch enables
+this feature. The "n" parameter is the elliptical eccentricity. This value is simply
+the ratio of the ellipse major axis to ellipse minor axis. A circle has an 
+eccentricity of 1.0.
+
+Dome allows eccentricity values greater than 0.0 but less than 2.0. An eccentricity
+less than 1.0 results in an ellipse having a semimajor axis = 1.0 and aligned along
+the x-axis. Likewise, an eccentricity greater than results in an ellipse having a
+semiminor axis = 1.0 and major axis aligned along the z-axis.
+
+
+====================
+Parabolic Structures
+====================
+DOME now includes functions which allow the design of geodesic parabolic dishes. Two command line switches 
+have been added to enable parabolics:
+
+	-dn where n = the distance from the dish center to the focus.
+	-rn Where n = the radius of the dish. This defaults to 2 x focus.
+
+The parabolic functions work with:
+1.) Class I or Class II geodesics
+2.) All supported polyhedron types.
+
+The following restrictions apply to the use of parabolics:
+
+1.) A DXF filename must be included with the parabolic switches. 
+2.) The -w wireframe option should not be used.
+3.) The ratio of focal length to dish diameter (f/d) must be greater than or equal 0.25.
+4.) No other output file type aside from the 3DFACE DXF file is supported at this time.
+5.) Frequency is based on a spherical formation. Large values of f/d will reduce the number of 
+    faces used in the structure. Compensate by further increasing the frequency.
+
+DOME produces a DXF file containing the dish face data and an ASCII text file named parabolic.txt containing
+the raw data for each face. The following data is output:
+
+1.) Index data for each triangle vertex (A, B, C see map.gif)
+2.) Chord lengths for each triangle side (a, b, c)
+3.) Face angles (A, B, C).
+
+This data is given for each polyhedron face. In the case of the class I icosahedron 20 faces will be output. The
+class II structure will use up to 60 triangles. Many of these faces may not contain data as this is dependent
+on the truncation used.
+
+The enclosed file map.gif contains a graphical representation one polyhedron face as well as the nomenclature 
+used for each triangle.
+
+The units used for the focus location will determine the units of chord length. If -d6 is used where 6 is the
+focal length in feet, then the chord lengths will be output in feet as well.
+
+The parabolic.txt file is designed to be read by a spreadsheet application such as Microsoft Excel. When importing this
+file into a spreadsheet, set the field delimiter to 'tab', the text delimiter to '"' and make sure that the first
+three columns are read as text fields.
+
+=============
+Other Goodies
+=============
+See the Applied Synergetics Homepage for image samples and links
+to other Synergetics Web sites. The latest DOME info can be found
+at http://www.applied-synergetics.com/ashp/html/domes.html
+
+==================
+UNIX/Linux Install
+==================
+
+See INSTALL file, or run
+
+   ./configure
+   make
+
+optionally followed by
+
+   make install
+
+================
+Other Platforms
+================
+Check the DOME web page for versions which support other platforms including 32-bit Windows.
+
+====================
+Source Code Comments
+====================
+Releases of DOME prior to 4.0 had all the source code in one file.
+DOME 4.80 has the source code split across several files:
+
+	dome.txt      - this file
+	Dome.cpp      - Source code for main program loop.
+	Geodesic.h    - Header file containing variables, structures and class
+                        member function prototypes.
+	Geodesic.cpp  - Source code for geodesic class member functions. Most of
+                        the work is done by these routines.
+	Dxfsave.cpp   - Geodesic class DXF save routines.
+	Povsave.cpp   - Geodesic class POV save routines.
+	Wrlsave.cpp   - Geodesic class WRL (VRML) save routines.
+	Offsave.cpp   - Geodesic class OFF save routines.
+	Cartesian.cpp - cartesian & spherical coordinate conversion & data structures
+        Cartesian.h   - header for cartesian.cpp
+	Chords.cpp    - class containing chord data structures
+        Chords.h      - header for chord.cpp
+        Command.cpp   - class implementing input parameter data structures
+        Command.h     - header for command.cpp
+	Faces.cpp     - class containing triangle face data structures
+        Faces.h       - header for faces.cpp	
+	Labels.cpp    - class containing vertex label data structures
+	Labels.h      - header for labels.cpp
+	Points.cpp    - class containing vertex position data structures
+	Points.h      - header for points.cpp
+	ThetaTruncation.cpp	- class for collecting truncation data
+	ThetaTruncation.h	- header for ThetaTruncation.cpp
+
+=============
+DOME Updates 
+=============
+This is some of the stuff I'd like to see in future versions of DOME & WinDome 
+
+-Provide Buckyball topological abundance in reports
+-Buckyball face data
+-Dihedral Face Angles
+-INI file input for customizing POV-ray and other settings.
+-Enhanced non-spherical support
+-Space frame support
+-Enhanced VRML Support
+-Graphical Display
+
+
+Feel free to contact me at rjbono@applied-synergetics.com for suggestions, bug reports or
+questions.
+
+=====================
+Copyright Information
+=====================
+DOME 4.80, Copyright (C) 1995 - 2002  Richard J. Bono
+
+This program is free software; you can redistribute it
+and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or any later version.
+
+This program is distributed in the hope that it will be
+useful,  but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU General Public License for more
+details.
+
+You should have received a copy of the GNU General Public
+License along with this program; if not, write to the Free
+Software Foundation, Inc., 675 Mass Ave, Cambridge, MA
+02139, USA.
+
+Please direct inquiries, comments and modifications to:
+
+	Richard J. Bono
+	44 Augusta Rd.
+	Brownsville, TX 78521
+	email: rjbono@applied-synergetics.com
+
+=============================
+Acknowledgements & References
+=============================
+The main reference used in the creation of this code was:
+"Geodesic Math & How to Use It" by Hugh Kenner, 1976,
+University of California Press. ISBN 0-520-02924-0;
+Library of Congress Catalog Card Number: 74-27292.
+Many thanks to Hugh for putting this data in an accessible format.
+
+Also, many thanks to:
+-J. F. (Jym) Nystrom for turning me on to Bucky back in the summer of 1984.
+-My wife and my daughters for their de-finite patience.
+-Chris Fearnley for pushing me to release this code, providing uploading
+ tips, general comments, GNU POV scripts and UNIX/LINUX make files.
+-Kirby Urner for introducing me to POV-ray and for providing DOME
+ with a home in cyberspace.
+-R. Buckminster Fuller for changing the way I view Universe.
+
+

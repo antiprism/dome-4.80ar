@@ -1,0 +1,34 @@
+INSTALL
+=======
+
+There are two packages available, both contain source
+
+      dome-4.80ar.02_win.zip  (Windows dome.exe executable, and source)
+      dome-4.80ar.02.tar.gz   (source-only)
+
+Windows users: unzip the package, optionally copy 'dome.exe' from the
+top level directory to somewhere more convenient.
+
+Everyone else: ...
+
+
+BUILDING THE DOME PROGRAM FROM SOURCE
+--------------------------------------
+
+Unpack the package file. In the top level directory, run
+
+   ./configure
+   make
+
+After a successful build the 'dome' executable will be in the 'src'
+directory. Copy it where you want it manually, or optionally install
+it with
+
+   make install
+
+Please, let me know if there are any problems with the build.
+
+Adrian Rossiter
+adrian@antiprism.com
+http://www.antiprism.com
+

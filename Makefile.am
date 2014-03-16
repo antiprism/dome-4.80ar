@@ -1,0 +1,10 @@
+
+#AUTOMAKE_OPTIONS = foreign
+SUBDIRS = src
+
+EXTRA_DIST = map.gif COPYING1 COPYING2
+
+docdir = $(datadir)/doc/$(PACKAGE)-$(VERSION)
+
+doc_DATA = README INSTALL map.gif COPYING1 COPYING2
+
