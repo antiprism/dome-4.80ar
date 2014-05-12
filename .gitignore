@@ -13,11 +13,8 @@ config.rpath
 config.sub
 configure
 configure.lineno
-depcomp
-install-sh
 libtool
 ltmain.sh
-missing
 stamp-h1
 *.o
 *.lo

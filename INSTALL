@@ -15,10 +15,16 @@ Everyone else: ...
 BUILDING THE DOME PROGRAM FROM SOURCE
 --------------------------------------
 
-Unpack the package file. In the top level directory, run
+
+Unpack the source tarball. (Note: If using source from the git repository
+there will be no configure script. The configure script can be created by
+running 'autoreconf'.)
+
+In the top level directory, run
 
    ./configure
    make
+
 
 After a successful build the 'dome' executable will be in the 'src'
 directory. Copy it where you want it manually, or optionally install
