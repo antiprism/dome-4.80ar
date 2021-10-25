@@ -21,4 +21,7 @@ AC_CHECK_HEADERS([stdlib.h string.h])
 # Checks for library functions.
 AC_CHECK_FUNCS([floor pow])
 
-AC_OUTPUT(Makefile src/Makefile)
+AC_CONFIG_FILES([Makefile
+                 src/Makefile
+                 ])
+AC_OUTPUT

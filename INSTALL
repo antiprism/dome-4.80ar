@@ -18,7 +18,7 @@ BUILDING THE DOME PROGRAM FROM SOURCE
 
 Unpack the source tarball. (Note: If using source from the git repository
 there will be no configure script. The configure script can be created by
-running 'autoreconf'.)
+running 'autoreconf -v -i -W all'.)
 
 In the top level directory, run
 
