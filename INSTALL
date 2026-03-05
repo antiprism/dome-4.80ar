@@ -1,40 +1,29 @@
 INSTALL
 =======
 
-There are two packages available, both contain source
+To build from source, run the following commands from the top level
+directory.
 
-      dome-4.80ar.02_win.zip  (Windows dome.exe executable, and source)
-      dome-4.80ar.02.tar.gz   (source-only)
+If you are building from repository code then first create the configure
+script (if you are building from the source or binary package files then
+skip this command as the configure script is included)
 
-Windows users: unzip the package, optionally copy 'dome.exe' from the
-top level directory to somewhere more convenient.
+   autoreconf -v -i -W all
 
-Everyone else: ...
-
-
-BUILDING THE DOME PROGRAM FROM SOURCE
---------------------------------------
-
-
-Unpack the source tarball. (Note: If using source from the git repository
-there will be no configure script. The configure script can be created by
-running 'autoreconf -v -i -W all'.)
-
-In the top level directory, run
+Now build the program
 
    ./configure
    make
 
-
 After a successful build the 'dome' executable will be in the 'src'
-directory. Copy it where you want it manually, or optionally install
+directory. Copy it to where you want it manually, or optionally install
 it with
 
    make install
 
-Please, let me know if there are any problems with the build.
 
-Adrian Rossiter
-adrian@antiprism.com
-http://www.antiprism.com
+Note: source and binary packages are available from
+
+   https://www.antiprism.com/other/dome/
+
 

@@ -1,5 +1,6 @@
 NOTE: This is a copy of DOME 4.80, 08/10/2002 with very minor modifications.
 
+    Build/Install: See INSTALL file
     Changes:       Changes to code to ease building on modern systems.
                    Changes to POV output for compatibility with latest POV-Ray.
                    Added OFF output.
@@ -180,14 +181,7 @@ at http://www.applied-synergetics.com/ashp/html/domes.html
 UNIX/Linux Install
 ==================
 
-See INSTALL file, or run
-
-   ./configure
-   make
-
-optionally followed by
-
-   make install
+See INSTALL file
 
 ================
 Other Platforms
